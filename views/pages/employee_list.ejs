@@ -1,0 +1,31 @@
+<%- include('../includes/head.ejs') %>
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+<div>
+    <h1>Hello World</h1>
+</div>
+<div class="col-sm-12">    
+    <div class="">
+    <ol>
+    <% employees.forEach(function(employee) { %>
+            <li>
+                <h4><a href="/employee/<%= employee.id %>"><%= employee.first_name %></a></h4>
+                <p>Email: <%= employee.email %></p>
+                <p>First Name: <%= employee.first_name %></p>
+                <p>Last Name: <%= employee.last_name %></p>
+                <p>Role: <%= employee.role %></p>
+                <p>Mobile Number: <%= employee.mobile_number %></p>
+                <p>ID: <%= employee.id %></p>
+                 <a href="employee/<%= employee.id %>/update">Edit employee</a> | <a href="employee/<%= employee.id %>/delete">Delete employee</a>
+            </li>
+        <br/>
+    <% }); %>
+    </ol>
+</div>
+</div>
+
+<a href="employee/create"><button>Add employee</button></a>
+
+<%- include('../includes/end.ejs') %>

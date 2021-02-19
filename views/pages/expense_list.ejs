@@ -1,0 +1,30 @@
+<%- include('../includes/head.ejs') %>
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+<div>
+    <h1>Hello World</h1>
+</div>
+<div class="col-sm-12">    
+    <div class="">
+    <ol>
+    <% expenses.forEach(function(expense) { %>
+            <li>
+                <h4><a href="/expense/<%= expense.id %>"><%= expense.name %></a></h4>
+                <p>Name: <%= expense.name %></p>
+                <p>Details: <%= expense.details %></p>
+                <p>Amount: $<%= expense.amount %></p>
+                <p>Type: <%= expense.type %></p>
+                <p>Time Created: <%= expense.time %></p>
+                 <a href="/expense/<%= expense.id %>/update">Edit expense</a> | <a href="/expense/<%= expense.id %>/delete">Delete expense</a>
+            </li>
+        <br/>
+    <% }); %>
+    </ol>
+</div>
+</div>
+
+<a href="expense/create"><button>Add expense</button></a>
+
+<%- include('../includes/end.ejs') %>

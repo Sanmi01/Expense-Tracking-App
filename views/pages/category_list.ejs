@@ -1,0 +1,26 @@
+<%- include('../includes/head.ejs') %>
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+<div>
+    <h1>Hello World</h1>
+</div>
+<div class="col-sm-12">    
+    <div class="">
+    <ol>
+    <% categories.forEach(function(category) { %>
+            <li>
+                <h4><a href="/category/<%= category.id %>"><%= category.name %></a></h4>
+                <p>Name: <%= category.name %></p>
+                 <a href="/category/<%= category.id %>/update">Edit category</a> | <a href="/category/<%= category.id %>/delete">Delete category</a>
+            </li>
+        <br/>
+    <% }); %>
+    </ol>
+</div>
+</div>
+
+<a href="category/create"><button>Add category</button></a>
+
+<%- include('../includes/end.ejs') %>

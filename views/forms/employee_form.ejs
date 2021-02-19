@@ -1,0 +1,54 @@
+<%- include('../includes/head.ejs') %>
+</head>
+<body>
+    <%- include('../includes/navigation.ejs') %>
+
+<% if (title == 'Create Employee') { %>
+    <div>
+        <h2>Add Employee</h2>
+        <div>
+            <form action="" method="post">
+                First Name: <br>
+                <input type="text" name="first_name" placeholder="First Name">
+                <br><br>
+                Last Name:<br>
+                <input type="text" name="last_name" placeholder="Last Name">
+                <br><br>
+                Email Address:<br>
+                <input type="email" name="email" placeholder="Email">
+                <br><br>
+                Mobile Number:<br>
+                <input type="number" name="mobile_number" placeholder="Mobile Number">
+                <br><br>
+                Role:<br>
+                <input type="text" name="role" placeholder="Role">
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+    <% } else if (title == 'Update Employee') { %>
+        <div>
+            <h2>Edit Employee</h2>
+            <div>
+                <form action="" method="post">
+                    First Name: <br>
+                    <input type="text" name="first_name" value= <%= employee.first_name%> >
+                    <br><br>
+                    Last Name:<br>
+                    <input type="text" name="last_name" value= <%= employee.last_name%> >
+                    <br><br>
+                    Email Address:<br>
+                    <input type="email" name="email" value= <%= employee.email%> >
+                    <br><br>
+                    Mobile Number:<br>
+                    <input type="number" name="mobile_number" value= <%= employee.mobile_number%> >
+                    <br><br>
+                    Role:<br>
+                    <input type="text" name="role" value= <%= employee.role%> >
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+<% } %>
+
+<%- include('../includes/end.ejs') %>

@@ -1,0 +1,20 @@
+<%- include('../includes/head.ejs') %>
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+<div>
+    <h1>Hello World</h1>
+</div>
+<div class="col-sm-12 single">
+    <h1><%= title %></h1>
+    <h3>Details of a Single Type</h3>
+    <p>Type ID = <%= type.id %></p>
+    <p>Name: <%= type.name %></p>
+    <a href="/type/<%= type.id %>/update">Edit type</a> | <a href="/type/<%= type.id %>/delete">Delete type</a>
+</div>
+</div>
+
+<a href="type/create"><button>Add type</button></a>
+
+<%- include('../includes/end.ejs') %>

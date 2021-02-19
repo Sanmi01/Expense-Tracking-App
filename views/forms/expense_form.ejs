@@ -1,0 +1,56 @@
+<%- include('../includes/head.ejs') %>
+</head>
+<body>
+    <%- include('../includes/navigation.ejs') %>
+
+<% if (title == 'Create Expense') { %>
+    <div>
+        <h2>Add Expense</h2>
+        <div>
+            <form action="" method="post">
+                Name: <br>
+                <input type="text" name="name" placeholder="Name">
+                <br><br>
+                Details:<br>
+                <input type="text" name="details" placeholder="Details">
+                <br><br>
+                Amount:<br>
+                <input type="number" name="amount" placeholder="Amount">
+                <br><br>
+                Type:<br>
+                <select name="type" placeholder="">
+                    <option value="Internal">Internal</option>
+                    <option value="External">External</option>
+                </select>
+                <br><br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+    <% } else if (title == 'Update Expense') { %>
+        <div>
+            <h2>Update Expense</h2>
+            <div>
+                <form action="" method="post">
+                    Name: <br>
+                    <input type="text" name="name" value= <%= expense.name %> >
+                    <br><br>
+                    Details:<br>
+                    <input type="text" name="details" value= <%= expense.details %> >
+                    <br><br>
+                    Amount:<br>
+                    <input type="number" name="amount" value= <%= expense.amount %> >
+                    <br><br>
+                    Type:<br>
+                    <select name="type" value= <%= expense.type %> >
+                        <option value="Internal">Internal</option>
+                        <option value="External">External</option>
+                    </select>
+                    <br><br>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+<% } %>
+
+<%- include('../includes/end.ejs') %>

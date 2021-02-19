@@ -1,0 +1,20 @@
+<%- include('../includes/head.ejs') %>
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+<div>
+    <h1>Hello World</h1>
+</div>
+<div class="col-sm-12 single">
+    <h1><%= title %></h1>
+    <h3>Details of a Single Category</h3>
+    <p>Category ID = <%= category.id %></p>
+    <p>Name: <%= category.name %></p>
+    <a href="/category/<%= category.id %>/update">Edit category</a> | <a href="/category/<%= category.id %>/delete">Delete category</a>
+</div>
+</div>
+
+<a href="category/create"><button>Add category</button></a>
+
+<%- include('../includes/end.ejs') %>
