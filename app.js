@@ -24,10 +24,20 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', function(req, res, next) {
   models.Employee.findAndCountAll()
-  .then(function(employeesCount){
-    res.render('pages/index',{ title: 'Homepage', employeesCount:employeesCount})
-  })
-  })
+  .then(function(employeesCount)
+  {
+    models.Expense.findAndCountAll()
+    .then(function(expenseCount){
+      models.Category.findAndCountAll()
+      .then(function(categoryCount) {
+        models.Type.findAndCountAll()
+        .then(function(typeCount) {
+          res.render('pages/index',{ title: 'Homepage', employeesCount:employeesCount, expenseCount:expenseCount, categoryCount:categoryCount, typeCount:typeCount});
+        });
+      });
+    });
+  });
+});
 
 // Employee routes
 app.use('/employee', require('./routes/employee'))
@@ -49,10 +59,9 @@ models.sequelize
      * Listen on provided port, on all network interfaces.
      */
     // app.listen(PORT, function() {
-    //   debug('Express server listening on port ' + app.address().PORT);
-   console.log(err);
+    //   debug('Express server listening on port ' + app.address().PORT);console.log(err);
     //app.on('error', onError);
     //app.on('listening', onListening);
   });
 
-// app.listen(PORT, console.log(`Server started on port ${PORT}`));
+// // app.listen(PORT, console.log(`Server started on port ${PORT}`))

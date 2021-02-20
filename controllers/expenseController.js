@@ -1,14 +1,22 @@
 var models = require('../models');
 
-exports.expense_create_get = function(req, res, next) {
-    res.render('forms/expense_form',{ title: 'Create Expense'})
+exports.expense_create_get = async function(req, res, next) {
+    const employees = await models.Employee.findAll();
+    const types = await models.Type.findAll();
+    const categories = await models.Category.findAll();
+
+    res.render('forms/expense_form',{ title: 'Create Expense', employees: employees, types: types, categories: categories })
 }
-exports.expense_create_post = function (req, res) {
-    models.Expense.create({
+exports.expense_create_post = async function (req, res) {
+
+    const expense = await models.Expense.create({
         name: req.body.name,
         details: req.body.details,
         amount: req.body.amount,
-        type: req.body.type
+        // type: req.body.type,
+        EmployeeId: req.body.employee_id,
+        CategoryId: req.body.category_id,
+        TypeId: req.body.type_id,
     }).then(function() {
         console.log("Expense created successfully");
         res.redirect('/expense');
@@ -54,7 +62,7 @@ exports.expense_update_post = function(req, res, next) {
             name: req.body.name,
         details: req.body.details,
         amount: req.body.amount,
-        type: req.body.type
+        // type: req.body.type
         },
       {
             where:
@@ -71,7 +79,14 @@ exports.expense_update_post = function(req, res, next) {
 exports.expense_detail = async function(req, res, next) {
 
     models.Expense.findByPk(
-            req.params.expense_id
+            req.params.expense_id,{
+                include: [
+                    {
+                        model: models.Employee,
+                        attributes: ['id', 'first_name', 'last_name', 'role']
+                      },
+                ]
+            },
             ).then(function(expense) {
     res.render('pages/expense_detail', { title: 'Expense Details', expense: expense} );
     console.log("Expense details renders successfully");
@@ -79,7 +94,14 @@ exports.expense_detail = async function(req, res, next) {
 };
 
 exports.expense_list = function(req, res, next) {
-    models.Expense.findAll()
+    models.Expense.findAll({
+        include: [
+            {
+                model: models.Employee,
+                attributes: ['id', 'first_name', 'last_name', 'role']
+              },
+        ]
+    })
     .then(function(expenses) {
         console.log("rendering expense list");
         res.render('pages/expense_list', { title: 'Expense List', expenses: expenses} );

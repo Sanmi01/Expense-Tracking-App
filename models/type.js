@@ -14,7 +14,9 @@ module.exports = (sequelize, DataTypes) => {
     })
     
   
-  
+    Type.associate = function(models) {
+      models.Type.hasMany(models.Expense);
+    }
     
     
     return Type

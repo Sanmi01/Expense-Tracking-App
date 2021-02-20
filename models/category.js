@@ -11,9 +11,11 @@ module.exports = (sequelize, DataTypes) => {
               isAlpha: true,
           }
         },
-    })
+    });
     
-  
+  Category.associate = function(models) {
+    models.Category.hasMany(models.Expense)
+  }
   
     
     

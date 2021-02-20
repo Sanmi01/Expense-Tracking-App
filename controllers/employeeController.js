@@ -74,21 +74,29 @@ exports.employee_update_post = function(req, res, next) {
 };
 
 
-exports.employee_list = function(req, res, next) {
+exports.employee_list = async function(req, res, next) {
+    const expenses = await models.Expense.findAll();
     models.Employee.findAll()
     .then(function(employees) {
         console.log("rendering employee list");
-        res.render('pages/employee_list', { title: 'Employee List', employees: employees} );
+        res.render('pages/employee_list', { title: 'Employee List', employees: employees, expenses: expenses} );
         console.log("Employees list renders successfully");
     })
 }
 
 exports.employee_detail = async function(req, res, next) {
-
+    const types = await models.Type.findAll();
+    const categories = await models.Category.findAll();
     models.Employee.findByPk(
-            req.params.employee_id
+            req.params.employee_id, {
+                include: [
+                  {
+                    model: models.Expense
+                  }
+                        ]
+                }
             ).then(function(employee) {
-    res.render('pages/employee_detail', { title: 'Employee Details', employee: employee} );
+    res.render('pages/employee_detail', { title: 'Employee Details', employee: employee, types: types, categories: categories} );
     console.log("Employee details renders successfully");
     });
 };

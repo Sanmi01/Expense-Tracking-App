@@ -6,6 +6,7 @@
 <div>
     <h1>Hello World</h1>
 </div>
+<div>
 <div class="col-sm-12 single">
     <h1><%= title %></h1>
     <h3>Details of a Single Employee</h3>
@@ -17,6 +18,55 @@
     <p>Mobile Number: <%= employee.mobile_number %></p>
     <a href="/employee/<%= employee.id %>/update">Edit employee</a> | <a href="/employee/<%= employee.id %>/delete">Delete employee</a>
 </div>
+
+<% if(employee.Expenses.length == 0) { %>
+    <h2>There are no expenses made by this employee yet </h2>
+<% } else { %>
+    <h2>Expenses Made: <%= employee.Expenses.length %> </h2>
+    <div>
+        <% employee.Expenses.forEach(function(expense) { %>
+        <a href="/expense/<%= expense.id %>" >
+          <div>
+            <p><%= expense.name %></p>
+          </div>
+          <a href="/expense/<%= expense.id %>/update" >Edit Expense</a>  <a href="/expense/<%= expense.id %>/delete">Delete Expense</a>
+        </a>
+        <% }); %>
+      </div>
+ <% } %>
+<div>
+    <h3>Make an expense</h3>
+    <form action="/expense/create" method="post">
+        <input type="hidden" name="employee_id" value="<%= employee.id %>">
+                Name: <br>
+                <input type="text" name="name" placeholder="Name">
+                <br><br>
+                Details:<br>
+                <input type="text" name="details" placeholder="Details">
+                <br><br>
+                Amount:<br>
+                <input type="number" name="amount" placeholder="Amount">
+                <br><br>
+                Type:<br>
+                <select name = "type_id" class="form-control">
+                    <% types.forEach(function(type) { %>
+                    <option  value="<%= type.id %>"><%= type.name %></option>
+                    <br/>
+                    <% }); %>
+                </select>
+                <br><br>
+                Category:<br>
+                <select name = "category_id" class="form-control">
+                    <% categories.forEach(function(category) { %>
+                    <option  value="<%= category.id %>"><%= category.name %></option>
+                    <br/>
+                    <% }); %>
+                </select>
+                <br><br>
+                <input type="submit" value="Submit">
+    </form>
+</div>
+
 </div>
 
 <a href="employee/create"><button>Add employee</button></a>

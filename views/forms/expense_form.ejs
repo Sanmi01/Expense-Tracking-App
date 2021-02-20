@@ -17,10 +17,34 @@
                 Amount:<br>
                 <input type="number" name="amount" placeholder="Amount">
                 <br><br>
-                Type:<br>
+                <!-- Type:<br>
                 <select name="type" placeholder="">
                     <option value="Internal">Internal</option>
                     <option value="External">External</option>
+                </select>
+                <br><br> -->
+                Employee:<br>
+                <select name = "employee_id" class="form-control">
+                    <% employees.forEach(function(employee) { %>
+                    <option  value="<%= employee.id %>"><%= employee.first_name %></option>
+                    <br/>
+                    <% }); %>
+                </select>
+                <br><br>
+                Type:<br>
+                <select name = "type_id" class="form-control">
+                    <% types.forEach(function(type) { %>
+                    <option  value="<%= type.id %>"><%= type.name %></option>
+                    <br/>
+                    <% }); %>
+                </select>
+                <br><br>
+                Category:<br>
+                <select name = "category_id" class="form-control">
+                    <% categories.forEach(function(category) { %>
+                    <option  value="<%= category.id %>"><%= category.name %></option>
+                    <br/>
+                    <% }); %>
                 </select>
                 <br><br>
                 <input type="submit" value="Submit">
@@ -41,11 +65,11 @@
                     Amount:<br>
                     <input type="number" name="amount" value= <%= expense.amount %> >
                     <br><br>
-                    Type:<br>
+                    <!-- Type:<br>
                     <select name="type" value= <%= expense.type %> >
                         <option value="Internal">Internal</option>
                         <option value="External">External</option>
-                    </select>
+                    </select> -->
                     <br><br>
                     <input type="submit" value="Submit">
                 </form>

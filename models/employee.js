@@ -41,6 +41,10 @@ module.exports = (sequelize, DataTypes) => {
       }},
     });
   
-  
+  Employee.associate = function(models) {
+    models.Employee.hasMany(models.Expense);
+  };
+
+
     return Employee;
 };

@@ -22,13 +22,6 @@ module.exports = (sequelize, DataTypes) => {
           isNumeric: true,
         }
       },
-      type: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            notEmpty: true,
-        }
-      },
       time: {
         type: DataTypes.DATE,
         allowNull: false,
@@ -37,8 +30,33 @@ module.exports = (sequelize, DataTypes) => {
           isAlpha: true,
         }
       },
+      EmployeeId: DataTypes.INTEGER,
+      CategoryId: DataTypes.INTEGER,
+      TypeId: DataTypes.INTEGER,
     });
   
-  
+    Expense.associate = function (models) {
+      models.Expense.belongsTo(models.Employee, {
+        onDelete: "CASCADE",
+        foreignKey: {
+        allowNull: false
+        }
+      });
+
+      models.Expense.belongsTo(models.Category, {
+        onDelete: "CASCADE",
+        foreignKey: {
+          allowNull: false
+        }
+      });
+
+      models.Expense.belongsTo(models.Type, {
+        onDelete: "CASCADE",
+        foreignKey: {
+          allowNull: false
+        }
+      });
+    }
+
     return Expense;
 };
