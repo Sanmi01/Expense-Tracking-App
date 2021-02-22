@@ -4,17 +4,18 @@
 <body>
     <%- include('../includes/navigation.ejs') %>
 <div>
-    <h1>Hello World</h1>
+    <h1>List of Categories</h1>
 </div>
 <div class="col-sm-12">    
     <div class="">
     <ol>
     <% categories.forEach(function(category) { %>
-            <li>
+            <div class="details">
                 <h4><a href="/category/<%= category.id %>"><%= category.name %></a></h4>
                 <p>Name: <%= category.name %></p>
+                <p>Number of Expenses Made Under This Category: <%= category.Expenses.length %></p>
                  <a href="/category/<%= category.id %>/update">Edit category</a> | <a href="/category/<%= category.id %>/delete">Delete category</a>
-            </li>
+            </div>
         <br/>
     <% }); %>
     </ol>

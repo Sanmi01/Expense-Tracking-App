@@ -24,7 +24,6 @@ exports.category_delete_get = function(req, res, next) {
 }
 
 exports.category_delete_post = function(req, res, next) {
-    console.log("1234")
     models.Category.destroy({
         where: {
             id: req.params.category_id
@@ -63,17 +62,33 @@ exports.category_update_post = function(req, res, next) {
 };
 
 exports.category_detail = async function(req, res, next) {
-
+    const employees = await models.Employee.findAll();
+    const types = await models.Type.findAll();
+    const categories = await models.Category.findAll();
     models.Category.findByPk(
-            req.params.category_id
+            req.params.category_id, {
+                include: [
+                  {
+                    model: models.Expense
+                  }
+                        ]
+                }
             ).then(function(category) {
-    res.render('pages/category_detail', { title: 'Category Details', category: category} );
+    res.render('pages/category_detail', { title: 'Category Details', category: category, employees: employees } );
     console.log("Category details renders successfully");
     });
 };
 
-exports.category_list = function(req, res, next) {
-    models.Category.findAll()
+exports.category_list = async function(req, res, next) {
+    const expenses = await models.Expense.findAll();
+    models.Category.findAll({
+        include: [
+            {
+                model: models.Expense,
+                attributes: ['name', 'amount']
+              },
+        ]
+    })
     .then(function(categories) {
         console.log("rendering category list");
         res.render('pages/category_list', { title: 'Category List', categories: categories} );

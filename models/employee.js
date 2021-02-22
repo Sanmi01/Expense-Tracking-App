@@ -33,6 +33,10 @@ module.exports = (sequelize, DataTypes) => {
           isAlpha: true,
         }
       },
+      department: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       email: {
           type: DataTypes.STRING,
           allowNull: false,

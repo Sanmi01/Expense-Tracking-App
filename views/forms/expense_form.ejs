@@ -17,12 +17,6 @@
                 Amount:<br>
                 <input type="number" name="amount" placeholder="Amount">
                 <br><br>
-                <!-- Type:<br>
-                <select name="type" placeholder="">
-                    <option value="Internal">Internal</option>
-                    <option value="External">External</option>
-                </select>
-                <br><br> -->
                 Employee:<br>
                 <select name = "employee_id" class="form-control">
                     <% employees.forEach(function(employee) { %>
@@ -64,12 +58,6 @@
                     <br><br>
                     Amount:<br>
                     <input type="number" name="amount" value= <%= expense.amount %> >
-                    <br><br>
-                    <!-- Type:<br>
-                    <select name="type" value= <%= expense.type %> >
-                        <option value="Internal">Internal</option>
-                        <option value="External">External</option>
-                    </select> -->
                     <br><br>
                     <input type="submit" value="Submit">
                 </form>

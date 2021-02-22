@@ -30,6 +30,13 @@ module.exports = (sequelize, DataTypes) => {
           isAlpha: true,
         }
       },
+      status: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notNull: true,
+        }
+      },
       EmployeeId: DataTypes.INTEGER,
       CategoryId: DataTypes.INTEGER,
       TypeId: DataTypes.INTEGER,

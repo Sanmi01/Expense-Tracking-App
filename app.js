@@ -22,7 +22,43 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
-app.get('/', function(req, res, next) {
+app.get('/', async function(req, res, next) {
+
+  // total sum of expenses
+  let totalSum = await models.Expense.sum('amount');
+
+  // five most recent expense
+  let recents = await models.Expense.findAll({
+    order: [
+      ['time', 'DESC']
+    ],
+    include:[
+      {
+        model:models.Employee,
+        attributes: ['id', 'first_name', 'last_name'],
+        
+      }
+    ],
+    limit:5
+  });
+
+  // top 5 most expensive expenses
+  let expensiveExpenses = await models.Expense.findAll({
+    order: [
+      ['amount', 'DESC']
+    ],
+    include:[
+      {
+        model:models.Employee,
+        attributes: ['id', 'first_name', 'last_name'],
+        
+      }
+    ],
+    limit:5
+  });
+
+
+
   models.Employee.findAndCountAll()
   .then(function(employeesCount)
   {
@@ -32,7 +68,16 @@ app.get('/', function(req, res, next) {
       .then(function(categoryCount) {
         models.Type.findAndCountAll()
         .then(function(typeCount) {
-          res.render('pages/index',{ title: 'Homepage', employeesCount:employeesCount, expenseCount:expenseCount, categoryCount:categoryCount, typeCount:typeCount});
+          res.render('pages/index', {
+            title: 'Homepage',
+            employeesCount: employeesCount,
+            expenseCount: expenseCount,
+            categoryCount: categoryCount,
+            typeCount: typeCount,
+            totalSum: totalSum,
+            recents: recents,
+            expensiveExpenses: expensiveExpenses,
+          });
         });
       });
     });

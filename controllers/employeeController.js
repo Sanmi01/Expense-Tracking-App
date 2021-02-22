@@ -12,6 +12,7 @@ exports.employee_create_post = function (req, res) {
         last_name: req.body.last_name,
         mobile_number: req.body.mobile_number,
         role: req.body.role,
+        department: req.body.department,
         email: req.body.email
     }).then(function() {
         console.log("Employee created successfully");
@@ -59,6 +60,7 @@ exports.employee_update_post = function(req, res, next) {
             last_name: req.body.last_name,
             mobile_number: req.body.mobile_number,
             role: req.body.role,
+            department: req.body.department,
             email: req.body.email
         },
       {
@@ -76,7 +78,14 @@ exports.employee_update_post = function(req, res, next) {
 
 exports.employee_list = async function(req, res, next) {
     const expenses = await models.Expense.findAll();
-    models.Employee.findAll()
+    models.Employee.findAll({
+        include: [
+            {
+                model: models.Expense,
+                attributes: ['name', 'amount']
+              },
+        ]
+    })
     .then(function(employees) {
         console.log("rendering employee list");
         res.render('pages/employee_list', { title: 'Employee List', employees: employees, expenses: expenses} );
@@ -87,6 +96,7 @@ exports.employee_list = async function(req, res, next) {
 exports.employee_detail = async function(req, res, next) {
     const types = await models.Type.findAll();
     const categories = await models.Category.findAll();
+    const employees = await models.Employee.findAll();
     models.Employee.findByPk(
             req.params.employee_id, {
                 include: [
@@ -96,7 +106,7 @@ exports.employee_detail = async function(req, res, next) {
                         ]
                 }
             ).then(function(employee) {
-    res.render('pages/employee_detail', { title: 'Employee Details', employee: employee, types: types, categories: categories} );
+    res.render('pages/employee_detail', { title: 'Employee Details', employee: employee, types: types, categories: categories, employees: employees} );
     console.log("Employee details renders successfully");
     });
 };

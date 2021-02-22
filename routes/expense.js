@@ -17,6 +17,8 @@ router.get('/:expense_id/update', expenseController.expense_update_get)
 
 router.post('/:expense_id/update', expenseController.expense_update_post)
 
+router.post('/:expense_id/review', expenseController.expense_review_post)
+
 router.get('/:expense_id', expenseController.expense_detail)
 
 router.get('/', expenseController.expense_list)

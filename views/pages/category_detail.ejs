@@ -3,9 +3,7 @@
 
 <body>
     <%- include('../includes/navigation.ejs') %>
-<div>
-    <h1>Hello World</h1>
-</div>
+    
 <div class="col-sm-12 single">
     <h1><%= title %></h1>
     <h3>Details of a Single Category</h3>
@@ -13,6 +11,61 @@
     <p>Name: <%= category.name %></p>
     <a href="/category/<%= category.id %>/update">Edit category</a> | <a href="/category/<%= category.id %>/delete">Delete category</a>
 </div>
+
+<% if(category.Expenses.length == 0) { %>
+    <h2>There are no expenses made under this category yet </h2>
+<% } else { %>
+    <h2>Expenses Made: <%= category.Expenses.length %> </h2>
+    <div>
+        <% category.Expenses.forEach(function(expense) { %>
+            <div class="details">
+          <div>
+            <p>Name of Expense: <%= expense.name %></p>
+            <p>Amount: $<%= expense.amount %></p>
+          </div>
+          <% if (expense.status == 'Pending') { %>
+            <p>Status: <%= expense.status %></p>
+            <button class="review-expense-button">Review Expense</button><br>
+            <a href="/expense/<%= expense.id %>" >View Expense</a> | <a href="/expense/<%= expense.id %>/update">Edit expense</a> | <a href="/expense/<%= expense.id %>/delete">Delete expense</a>
+            <div class="modal-container modal">
+                <div class="modal">
+                    <button class="close-btn close">
+                        <i class="fa fa-times"></i>
+                    </button>
+                    <div>
+                        <p>Name: <%= expense.name %></p>
+                        <p>Details: <%= expense.details %></p>
+                        <p>Amount: $<%= expense.amount %></p>
+                    </div>
+            <form action="/expense/<%= expense.id %>/review" method="post" class="toggle" id="review-expense-form">
+                Manager:
+                    <select name = "employee_id" class="form-control">
+                        <% employees.forEach(function(employee) { %>
+                            <% if((employee.role.toLowerCase()) == 'manager'){ %> 
+                                <option  value="<%= employee.id %>"><%= employee.first_name %></option>
+                                <% } %>
+                        <br/>
+                        <% }); %>
+                    </select>
+                    <br>
+                    Status:
+                    <select name = "status">
+                        <option value="Approved">Approved</option>
+                        <option  value="Declined">Declined</option>
+                    </select><br>
+                    <input type="submit" value="Submit">
+            </form>
+            </div>
+            </div>
+            </div>
+            <% } else { %>
+                <p>Status: <%= expense.status %></p>
+                <a href="/expense/<%= expense.id %>" >View Expense</a> | <a href="/expense/<%= expense.id %>/delete">Delete expense</a>
+            </div>
+                <% } %>
+        <% }); %>
+      </div>
+ <% } %>
 </div>
 
 <a href="category/create"><button>Add category</button></a>

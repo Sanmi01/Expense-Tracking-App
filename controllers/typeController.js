@@ -63,17 +63,31 @@ exports.type_update_post = function(req, res, next) {
 };
 
 exports.type_detail = async function(req, res, next) {
-
+    const employees = await models.Employee.findAll();
     models.Type.findByPk(
-            req.params.type_id
+            req.params.type_id, {
+                include: [
+                  {
+                    model: models.Expense
+                  }
+                        ]
+                }
             ).then(function(type) {
-    res.render('pages/type_detail', { title: 'Type Details', type: type} );
+    res.render('pages/type_detail', { title: 'Type Details', type: type, employees: employees} );
     console.log("Type details renders successfully");
     });
 };
 
-exports.type_list = function(req, res, next) {
-    models.Type.findAll()
+exports.type_list = async function(req, res, next) {
+    const expenses = await models.Expense.findAll();
+    models.Type.findAll({
+        include: [
+            {
+                model: models.Expense,
+                attributes: ['name', 'amount']
+              },
+        ]
+    })
     .then(function(types) {
         console.log("rendering type list");
         res.render('pages/type_list', { title: 'Type List', types: types} );
