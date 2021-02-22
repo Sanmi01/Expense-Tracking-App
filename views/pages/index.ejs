@@ -14,14 +14,14 @@
 <div>
     <p>Top 5 Most Recent Expenses</p>
     <% recents.forEach(recent => { %>
-        <p>Name: <%= recent.name %>, Amount: <%= recent.amount %></p>
+        <p>Name: <%= recent.name %>, Amount: $<%= recent.amount %></p>
         <%}) %>
 </div>
 
 <div>
     <p>Top 5 Most Expensive Expenses</p>
     <% expensiveExpenses.forEach(expensiveExpense => { %>
-        <p>Name: <%= expensiveExpense.name %>, Amount: <%= expensiveExpense.amount %></p>
+        <p>Name: <%= expensiveExpense.name %>, Amount: $<%= expensiveExpense.amount %></p>
         <%}) %>
 </div>
 
