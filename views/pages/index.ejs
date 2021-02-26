@@ -13,30 +13,35 @@
     <p>Total sum of all expenses: $<%= totalSum%></p>
 </div>
 
+<div class="info">
 <div>
-    <p>Top 5 Most Recent Expenses</p>
+    <h2>Top 5 Most Recent Expenses</h2>
+    <ol>
     <% recents.forEach(recent => { %>
-        <p>Name: <%= recent.name %>, Amount: $<%= recent.amount %></p>
+        <li>Name: <%= recent.name %>, Amount: $<%= recent.amount %></li>
         <%}) %>
+    </ol>
 </div>
 
 <div>
-    <p>Top 5 Most Expensive Expenses</p>
+    <h2>Top 5 Most Expensive Expenses</h2>
+    <ol>
     <% expensiveExpenses.forEach(expensiveExpense => { %>
-        <p>Name: <%= expensiveExpense.name %>, Amount: $<%= expensiveExpense.amount %></p>
+        <li>Name: <%= expensiveExpense.name %>, Amount: $<%= expensiveExpense.amount %></li>
         <%}) %>
+    </ol>
 </div>
 
 <div>
-    <p>Expenses listed by Category</p>
+    <h2>Expenses listed by Category</h2>
     <% expenseCategories.forEach(expenseCategory => { %> 
-        <p class="fwb"><%= expenseCategory.name %></p>
+        <h3><%= expenseCategory.name %></h3>
         <%if(expenseCategory.Expenses.length == 0){%> 
             <p>There are no expenses under this category yet</p>
         <%}else{%> 
             <ol>
             <% expenseCategory.Expenses.forEach(item => { %> 
-                <li><%= item.details %></li>
+                <li>Name: <%= item.name %>, Amount: $<%= item.amount %> </li>
             <%}) %>
             </ol>
         <%}
@@ -46,15 +51,15 @@
 </div>
 
 <div>
-    <p>Expenses listed by Types</p>
+    <h2>Expenses listed by Types</h2>
     <% expenseTypes.forEach(expenseType => { %> 
-        <p class="fwb"><%= expenseType.name %></p>
+        <h3><%= expenseType.name %></h3>
         <%if(expenseType.Expenses.length == 0){%> 
             <p>There are no expenses under this type yet</p>
         <%}else{%> 
             <ol>
             <% expenseType.Expenses.forEach(item => { %> 
-                <li><%= item.details %></li>
+                <li>Name: <%= item.name %>, Amount: $<%= item.amount %> </li>
             <%}) %>
             </ol>
         <%}
@@ -64,21 +69,22 @@
 </div>
 
 <div>
-    <p>Expenses listed by Department</p>
+    <h2>Expenses listed by Department</h2>
     <% expenseDepartments.forEach(expenseDepartment => { %> 
-        <p><%= expenseDepartment.name %></p>
+        <h3><%= expenseDepartment.name %></h3>
         <%if(expenseDepartment.Expenses.length == 0){%> 
             <p>There are no expenses under this department yet</p>
         <%}else{%> 
             <ol>
             <% expenseDepartment.Expenses.forEach(item => { %> 
-                <li><%= item.details %></li>
+                <li>Name: <%= item.name %>, Amount: $<%= item.amount %> </li>
             <%}) %>
             </ol>
         <%}
         %>
     <% })
     %>
+</div>
 </div>
 
 <%- include('../includes/end.ejs') %>

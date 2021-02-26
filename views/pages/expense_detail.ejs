@@ -33,7 +33,7 @@
                 </div>
         <form action="/expense/<%= expense.id %>/review" method="post" class="toggle" id="review-expense-form">
             Manager:
-                <select name = "employee_id" class="form-control">
+                <select name = "employee_id" class="form-control" required>
                     <% employees.forEach(function(employee) { %>
                         <% if((employee.role.toLowerCase()) == 'manager' && employee.DepartmentId == expense.DepartmentId){ %>  
                             <option  value="<%= employee.id %>"><%= employee.first_name %></option>

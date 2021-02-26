@@ -146,3 +146,10 @@ button {
     cursor: pointer;
 }
 
+.info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(430px, 0.65fr));
+    grid-template-rows: auto;
+    gap: 2rem;
+    padding: 2rem;
+}

@@ -50,8 +50,8 @@ app.get('/', async function(req, res, next) {
     ],
     include:[
       {
-        model:models.Employee,
-        attributes: ['id', 'first_name', 'last_name'],
+        model:models.Category,
+        attributes: ['id', 'name'],
         
       }
     ],
@@ -63,7 +63,7 @@ app.get('/', async function(req, res, next) {
     include: [
       {
         model: models.Expense,
-        attributes: ['details']
+        attributes: ['name', 'amount']
       }
     ],
     group: ['Category.id', 'Expenses.id']
@@ -75,7 +75,7 @@ app.get('/', async function(req, res, next) {
     include: [
       {
         model: models.Expense,
-        attributes: ['details']
+        attributes: ['name', 'amount']
       }
     ],
     group: ['Type.id','Expenses.id']
@@ -87,7 +87,7 @@ app.get('/', async function(req, res, next) {
     include: [
       {
         model: models.Expense,
-        attributes: ['details']
+        attributes: ['name', 'amount']
       }
     ],
     group: ['Department.id','Expenses.id']
