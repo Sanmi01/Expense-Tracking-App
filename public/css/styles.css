@@ -1,0 +1,148 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap");
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', arial;
+    min-height: 100%;
+}
+
+
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #50b750;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    background-color: #141414;
+    width: 100%;
+    font-size: 1.2rem;
+    align-items: center;
+}
+
+nav ul {
+    display: flex;
+}
+
+ul 
+
+nav ul li {
+    margin-right: 20px;
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+nav ul li a {
+    display: block;
+    padding: 0 1em;
+}
+
+nav a {
+    color: #eee;
+    transition: 0.25s
+}
+
+nav a span span {
+    font-size: 3rem;
+    color: #50b750
+}
+
+nav a:hover {
+    color: #50b750;
+    font-size: 1.25rem;
+    transition: 0.25s
+}
+
+footer {
+    background-color: #141414;
+    color: #eeeeee;
+    text-align: center;
+}
+
+.modal-container {
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.modal-container .modal {
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    overflow: hidden;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    width: 400px;
+}
+
+.close-btn {
+    background-color: transparent;
+    font-size: 25px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.alert {
+    width: 50%;
+    position: relative;
+    background-color: rgb(240, 98, 98);
+    margin: auto;
+    padding: 2rem;
+}
+
+.closed {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.modal-container.show-modal {
+    display: block
+}
+
+
+input, select {
+    padding: 10px 16px;
+    outline: none;
+    border-radius: 8px;
+    margin: 5px;
+    background-color: #f3f3f4;
+    width: 16rem;
+}
+
+.details {
+    border-radius: 8px;
+    background-color: rgb(107, 100, 100);
+    margin: 8px;
+    padding: 20px;
+}
+
+button {
+    padding: 5px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+

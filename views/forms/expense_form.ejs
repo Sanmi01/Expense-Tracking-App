@@ -1,0 +1,78 @@
+<%- include('../includes/head.ejs') %>
+</head>
+<body>
+    <%- include('../includes/navigation.ejs') %>
+
+<% if (title == 'Create Expense') { %>
+    <div>
+        <h2>Add Expense</h2>
+        <div>
+            <% if(typeof errorMessage != 'undefined') { %>
+                <div class="alert alert-danger alert-dismissible w-75 mx-auto">
+                    <button type="button" class="closed" data-dismiss="alert">
+                        <i class="fa fa-times"></i>
+                    </button>
+                <% errorMessage.forEach((error) => { %>
+                        <strong><%= error.msg %></strong> <br> 
+                <% }) %>
+                </div>
+            <% } %>
+            <form action="" method="post">
+                Name: <br>
+                <input type="text" name="name" placeholder="Name">
+                <br><br>
+                Details:<br>
+                <input type="text" name="details" placeholder="Details">
+                <br><br>
+                Amount:<br>
+                <input type="number" name="amount" placeholder="Amount" min="0">
+                <br><br>
+                Employee:<br>
+                <select name = "employee_id" class="form-control">
+                    <% employees.forEach(function(employee) { %>
+                    <option  value="<%= employee.id %>"><%= employee.first_name %></option>
+                    <br/>
+                    <% }); %>
+                </select>
+                <br><br>
+                Type:<br>
+                <select name = "type_id" class="form-control">
+                    <% types.forEach(function(type) { %>
+                    <option  value="<%= type.id %>"><%= type.name %></option>
+                    <br/>
+                    <% }); %>
+                </select>
+                <br><br>
+                Category:<br>
+                <select name = "category_id" class="form-control">
+                    <% categories.forEach(function(category) { %>
+                    <option  value="<%= category.id %>"><%= category.name %></option>
+                    <br/>
+                    <% }); %>
+                </select>
+                <br><br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+    <% } else if (title == 'Update Expense') { %>
+        <div>
+            <h2>Update Expense</h2>
+            <div>
+                <form action="" method="post">
+                    Name: <br>
+                    <input type="text" name="name" value= <%= expense.name %> >
+                    <br><br>
+                    Details:<br>
+                    <input type="text" name="details" value= <%= expense.details %> >
+                    <br><br>
+                    Amount:<br>
+                    <input type="number" name="amount" value= <%= expense.amount %> min="0" >
+                    <br><br>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+<% } %>
+
+<%- include('../includes/end.ejs') %>

@@ -1,0 +1,34 @@
+{
+  "name": "expense-tracking-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "D": "^1.0.0",
+    "async": "^3.2.0",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "debug": "^4.3.1",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-ejs-layouts": "^2.5.0",
+    "express-validator": "^6.9.2",
+    "http-errors": "^1.8.0",
+    "pg": "^8.5.1",
+    "pg-hstore": "^2.3.3",
+    "pug": "^3.0.0",
+    "sequelize": "^6.5.0",
+    "sequelize-cli": "^6.2.0",
+    "serverless-http": "^2.7.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "start-dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Oluwasanmi",
+  "license": "ISC"
+}

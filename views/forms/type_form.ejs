@@ -1,0 +1,32 @@
+<%- include('../includes/head.ejs') %>
+</head>
+<body>
+    <%- include('../includes/navigation.ejs') %>
+
+<% if (title == 'Create Type') { %>
+    <div>
+        <h2>Add Type</h2>
+        <div>
+            <form action="" method="post">
+                Name: <br>
+                <input type="text" name="name" placeholder="Name">
+                <br><br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+    <% } else if (title == 'Update Type') { %>
+        <div>
+            <h2>Update Type</h2>
+            <div>
+                <form action="" method="post">
+                    Name: <br>
+                    <input type="text" name="name" value= <%= type.name %> >
+                    <br><br>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+<% } %>
+
+<%- include('../includes/end.ejs') %>

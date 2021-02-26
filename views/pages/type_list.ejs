@@ -1,0 +1,27 @@
+<%- include('../includes/head.ejs') %>
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+    <div>
+        <h1>List of Types</h1>
+    </div>
+<div class="col-sm-12">    
+    <div class="">
+    <ol>
+    <% types.forEach(function(type) { %>
+            <div class="details">
+                <h4><a href="/type/<%= type.id %>"><%= type.name %></a></h4>
+                <p>Name: <%= type.name %></p>
+                <p>Number of Expenses Under This Type: <%= type.Expenses.length %></p>
+                 <a href="/type/<%= type.id %>/update">Edit type</a> | <a href="/type/<%= type.id %>/delete">Delete type</a>
+            </div>
+        <br/>
+    <% }); %>
+    </ol>
+</div>
+</div>
+
+<a href="type/create"><button>Add type</button></a>
+
+<%- include('../includes/end.ejs') %>

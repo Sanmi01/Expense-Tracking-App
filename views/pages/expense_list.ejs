@@ -1,0 +1,70 @@
+<%- include('../includes/head.ejs') %>
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+<div>
+    <h1>List of Expenses</h1>
+</div>
+<div class="col-sm-12">    
+    <div class="">
+    <ol>
+    <% expenses.forEach(function(expense) { %>
+            <li>
+                <div class="details">
+                <h4><a href="/expense/<%= expense.id %>"><%= expense.name %></a></h4>
+                <p>Name: <%= expense.name %></p>
+                <p>Details: <%= expense.details %></p>
+                <p>Amount: $<%= expense.amount %></p>
+                <p>Status: <%= expense.status %></p>
+                <p>Expense Made By: <%= expense.Employee.first_name %> <%= expense.Employee.last_name %> (<%= expense.Employee.role %>)</p>
+                <p>Expense Made From: <%= expense.Employee.department %></p>
+                <p>Time Created: <%= expense.time %></p>
+                <% if (expense.status == 'Pending') { %>
+        <button class="review-expense-button">Review Expense</button><br>
+        <div class="modal-container modal">
+            <div class="modal">
+                <button class="close-btn close">
+                    <i class="fa fa-times"></i>
+                </button>
+                <div>
+                    <p>Name: <%= expense.name %></p>
+                    <p>Details: <%= expense.details %></p>
+                    <p>Amount: $<%= expense.amount %></p>
+                </div>
+        <form action="/expense/<%= expense.id %>/review" method="post" class="toggle" id="review-expense-form">
+            Manager:
+                <select name = "employee_id" class="form-control">
+                    <% employees.forEach(function(employee) { %>
+                        <% if((employee.role.toLowerCase()) == 'manager'){ %> 
+                    <option  value="<%= employee.id %>"><%= employee.first_name %></option>
+                    <% } %> 
+                    <br/>
+                    <% }); %>
+                </select>
+                <br>
+                Status:
+                <select name = "status">
+                    <option value="Approved">Approved</option>
+                    <option  value="Declined">Declined</option>
+                </select><br>
+                <input type="submit" value="Submit">
+        </form>
+        </div>
+        </div>
+                 <a href="/expense/<%= expense.id %>/update">Edit expense</a> | <a href="/expense/<%= expense.id %>/delete">Delete expense</a>
+                 </div>
+                 <% } else { %>
+                    <a href="/expense/<%= expense.id %>/delete">Delete expense</a>
+                    </div>
+                    <% } %>
+                </li>
+        <br/>
+    <% }); %>
+    </ol>
+</div>
+</div>
+
+<a href="expense/create"><button>Add expense</button></a>
+
+<%- include('../includes/end.ejs') %>
