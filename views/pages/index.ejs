@@ -35,7 +35,8 @@
 <div>
     <h2>Expenses listed by Category</h2>
     <% expenseCategories.forEach(expenseCategory => { %> 
-        <h3><%= expenseCategory.name %></h3>
+        <ul>
+        <li><h3><%= expenseCategory.name %></h3></li>
         <%if(expenseCategory.Expenses.length == 0){%> 
             <p>There are no expenses under this category yet</p>
         <%}else{%> 
@@ -46,6 +47,7 @@
             </ol>
         <%}
         %>
+        </ul>
     <% })
     %>
 </div>
@@ -53,7 +55,8 @@
 <div>
     <h2>Expenses listed by Types</h2>
     <% expenseTypes.forEach(expenseType => { %> 
-        <h3><%= expenseType.name %></h3>
+        <ul>
+        <li><h3><%= expenseType.name %></h3></li>
         <%if(expenseType.Expenses.length == 0){%> 
             <p>There are no expenses under this type yet</p>
         <%}else{%> 
@@ -64,6 +67,7 @@
             </ol>
         <%}
         %>
+        </ul>
     <% })
     %>
 </div>
@@ -71,7 +75,8 @@
 <div>
     <h2>Expenses listed by Department</h2>
     <% expenseDepartments.forEach(expenseDepartment => { %> 
-        <h3><%= expenseDepartment.name %></h3>
+        <ul>
+        <li><h3><%= expenseDepartment.name %></h3></li>
         <%if(expenseDepartment.Expenses.length == 0){%> 
             <p>There are no expenses under this department yet</p>
         <%}else{%> 
@@ -82,6 +87,7 @@
             </ol>
         <%}
         %>
+        </ul>
     <% })
     %>
 </div>
