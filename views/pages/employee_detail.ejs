@@ -38,6 +38,7 @@
                     <button class="close-btn close">
                         <i class="fa fa-times"></i>
                     </button>
+                    <h2>Review Expense</h2>
                     <div>
                         <p>Name: <%= expense.name %></p>
                         <p>Details: <%= expense.details %></p>
@@ -73,12 +74,13 @@
       </div>
  <% } %>
 <div>
-    <button class="review-expense-button">Make an expense</button>
-    <div class="modal-container modal">
-        <div class="modal">
-    <button class="close-btn close">
-        <i class="fa fa-times"></i>
-    </button>
+    <!-- <button class="review-expense-button">Make an expense</button> -->
+    <div>
+        <div>
+    <!-- <button class="close-btn close"> -->
+        <!-- <i class="fa fa-times"></i> -->
+    <!-- </button> -->
+    <h2>Make an expense</h2>
     <form action="/expense/create" method="post">
         <input type="hidden" name="employee_id" value="<%= employee.id %>">
                 Name: <br>
