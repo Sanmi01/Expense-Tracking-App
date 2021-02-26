@@ -42,7 +42,7 @@
                 Manager:
                     <select name = "employee_id" class="form-control">
                         <% employees.forEach(function(employee) { %>
-                            <% if((employee.role.toLowerCase()) == 'manager'){ %> 
+                            <% if((employee.role.toLowerCase()) == 'manager' && employee.DepartmentId == expense.DepartmentId){ %>  
                                 <option  value="<%= employee.id %>"><%= employee.first_name %></option>
                                 <% } %>
                         <br/>

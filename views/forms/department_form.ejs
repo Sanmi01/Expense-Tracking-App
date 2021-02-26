@@ -1,0 +1,32 @@
+<%- include('../includes/head.ejs') %>
+</head>
+<body>
+    <%- include('../includes/navigation.ejs') %>
+
+<% if (title == 'Create Department') { %>
+    <div>
+        <h2>Add Department</h2>
+        <div>
+            <form action="" method="post">
+                Name: <br>
+                <input type="text" name="name" placeholder="Name">
+                <br><br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+    <% } else if (title == 'Update Department') { %>
+        <div>
+            <h2>Update Department</h2>
+            <div>
+                <form action="" method="post">
+                    Name: <br>
+                    <input type="text" name="name" value= <%= department.name %> >
+                    <br><br>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+<% } %>
+
+<%- include('../includes/end.ejs') %>

@@ -17,7 +17,7 @@
                 <% }) %>
                 </div>
             <% } %>
-            <form action="" method="post" novalidate>
+            <form action="" method="post">
                 First Name: <br>
                 <input type="text" name="first_name" placeholder="First Name">
                 <br><br>
@@ -37,15 +37,11 @@
                 </select>
                 <br>
                 Department:
-                <select name="department">
-                    <option value="Engineering">Engineering</option>
-                    <option value="Public Relations">Public Relations</option>
-                    <option value="Human Resources">Human Resources</option>
-                    <option value="Administration">Administration</option>
-                    <option value="Legal">Legal</option>
-                    <option value="Accounting">Accounting</option>
-                    <option value="Security">Security</option>
-                    <!-- <option value=""></option> -->
+                <select name="department_id">
+                    <% departments.forEach((department) => { %>
+                        <option value="<%= department.id %>"><%= department.name %></option>
+                        <br/>
+                        <% }); %>
                 </select>
                 <br>
                 <input type="submit" value="Submit">

@@ -27,19 +27,24 @@ module.exports = (sequelize, DataTypes) => {
           isAlpha: true,
         }
       },
-      department: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
       email: {
           type: DataTypes.STRING,
           allowNull: false,
           validate: {
             isEmail: true,
       }},
+      DepartmentId: {type: DataTypes.INTEGER}
     });
   
   Employee.associate = function(models) {
+
+    models.Employee.belongsTo(models.Department, {
+      onDelete: "CASCADE",
+      foreignKey: {
+        allowNull: false
+      }
+    });
+
     models.Employee.hasMany(models.Expense);
   };
 

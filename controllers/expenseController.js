@@ -2,22 +2,45 @@ var models = require('../models');
 const {check, validationResult} = require('express-validator/check');
 
 exports.expense_create_get = async function(req, res, next) {
-    const employees = await models.Employee.findAll();
     const types = await models.Type.findAll();
     const categories = await models.Category.findAll();
+    const departments = await models.Department.findAll();
+    const employees = await models.Employee.findAll();
 
-    res.render('forms/expense_form',{ title: 'Create Expense', employees: employees, types: types, categories: categories })
+
+    models.Employee.findByPk(
+        req.body.employee_id, {
+        include: [
+          {
+            model: models.Expense
+          }
+        ]
+        }
+).then(function(employee) {
+    // console.log("LOOK HERE")
+    // console.log(employee)
+    res.render('forms/expense_form',{ title: 'Create Expense', employee:employee, employees: employees, types: types, categories: categories, departments:departments })
+});
 }
 exports.expense_create_post = async function (req, res) {
 
-    let Amount = req.body.amount;
-    let status = '';
+    const departments = await models.Department.findAll();
+    const types = await models.Type.findAll();
+    const categories = await models.Category.findAll();
 
-    if(Amount < 1000) {
-        status = 'Approved'
-    } else {
-        status = 'Pending'
-    }
+  let employee = await  models.Employee.findByPk(
+      req.body.employee_id, {
+      include: [
+        {
+          model: models.Expense
+        }
+      ]
+      }
+)
+// console.log("LOOK")
+let employDepId = employee.DepartmentId;
+
+    
 
     const errors = validationResult(req);
 
@@ -28,16 +51,26 @@ exports.expense_create_post = async function (req, res) {
         const errorMessage = errors.array();
         res.render('forms/expense_form',{ title: 'Create Expense', errorMessage, employees: employees, types: types, categories: categories})
       } else {
+        const employees = await models.Employee.findAll();
+        let employee_id = req.body.employee_id;
+
+        let Amount = req.body.amount;
+    let status = '';
+
+    if(Amount < 1000) {
+        status = 'Approved'
+    } else {
+        status = 'Pending'
+    }
     const expense = await models.Expense.create({
         name: req.body.name,
         details: req.body.details,
         amount: req.body.amount,
         status: status,
-        // type: req.body.type,
-        TypeId: req.type_id,
         EmployeeId: req.body.employee_id,
         CategoryId: req.body.category_id,
         TypeId: req.body.type_id,
+        DepartmentId: employDepId,
     }).then(function() {
         console.log("Expense created successfully");
         res.redirect('/expense');
@@ -148,10 +181,14 @@ exports.expense_detail = async function(req, res, next) {
                 include: [
                     {
                         model: models.Employee,
-                        attributes: ['id', 'first_name', 'last_name', 'role', 'department']
+                        attributes: ['id', 'first_name', 'last_name', 'role']
                       },
                       {
                         model: models.Type,
+                        attributes: ['id', 'name']
+                      },
+                      {
+                        model: models.Department,
                         attributes: ['id', 'name']
                       },
                       {
@@ -172,7 +209,11 @@ exports.expense_list = async function(req, res, next) {
         include: [
             {
                 model: models.Employee,
-                attributes: ['id', 'first_name', 'last_name', 'role', 'department']
+                attributes: ['id', 'first_name', 'last_name', 'role']
+              },
+              {
+                model: models.Department,
+                attributes: ['id', 'name']
               },
         ]
     })

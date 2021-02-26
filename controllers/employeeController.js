@@ -4,8 +4,9 @@ const {check, validationResult} = require('express-validator/check');
 
 
 
-exports.employee_create_get = function(req, res, next) {
-    res.render('forms/employee_form',{ title: 'Create Employee'})
+exports.employee_create_get = async function(req, res, next) {
+    const departments = await models.Department.findAll();
+    res.render('forms/employee_form',{ title: 'Create Employee', departments: departments})
 }
 
 
@@ -14,7 +15,8 @@ exports.employee_create_post = async function(req, res) {
 
     if (!errors.isEmpty()) {
         const errorMessage = errors.array();
-        res.render('forms/employee_form',{ title: 'Create Employee', errorMessage})
+        const departments = await models.Department.findAll();
+        res.render('forms/employee_form',{ title: 'Create Employee', departments: departments, errorMessage})
       } else {
     
     models.Employee.create({
@@ -22,8 +24,8 @@ exports.employee_create_post = async function(req, res) {
         last_name: req.body.last_name,
         mobile_number: req.body.mobile_number,
         role: req.body.role,
-        department: req.body.department,
-        email: req.body.email
+        email: req.body.email,
+        DepartmentId: req.body.department_id
     }).then(function() {
         console.log("Employee created successfully");
         res.redirect('/employee');
@@ -78,8 +80,7 @@ exports.employee_update_post = async function(req, res, next) {
             last_name: req.body.last_name,
             mobile_number: req.body.mobile_number,
             role: req.body.role,
-            department: req.body.department,
-            email: req.body.email
+            email: req.body.email,
         },
       {
             where:
@@ -103,6 +104,10 @@ exports.employee_list = async function(req, res, next) {
                 model: models.Expense,
                 attributes: ['name', 'amount']
               },
+              {
+                model: models.Department,
+                attributes: ['id', 'name']
+              },
         ]
     })
     .then(function(employees) {
@@ -121,6 +126,10 @@ exports.employee_detail = async function(req, res, next) {
                 include: [
                   {
                     model: models.Expense
+                  },
+                  {
+                    model: models.Department,
+                    attributes: ['id', 'name']
                   }
                         ]
                 }

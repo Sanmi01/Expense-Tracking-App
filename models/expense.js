@@ -40,6 +40,7 @@ module.exports = (sequelize, DataTypes) => {
       EmployeeId: DataTypes.INTEGER,
       CategoryId: DataTypes.INTEGER,
       TypeId: DataTypes.INTEGER,
+      DepartmentId: {type: DataTypes.INTEGER},
     });
   
     Expense.associate = function (models) {
@@ -47,6 +48,13 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: "CASCADE",
         foreignKey: {
         allowNull: false
+        }
+      });
+
+      models.Expense.belongsTo(models.Department, {
+        onDelete: "CASCADE",
+        foreignKey: {
+          allowNull: false
         }
       });
 

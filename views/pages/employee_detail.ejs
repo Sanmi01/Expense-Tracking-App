@@ -13,7 +13,7 @@
     <p>Last Name: <%= employee.last_name %></p>
     <p>Email: <%= employee.email %></p>
     <p>Role: <%= employee.role %></p>
-    <p>Department: <%= employee.department %></p>
+    <p>Department: <%= employee.Department.name %></p>
     <p>Mobile Number: <%= employee.mobile_number %></p>
     <a href="/employee/<%= employee.id %>/update">Edit employee</a> | <a href="/employee/<%= employee.id %>/delete">Delete employee</a>
 </div>
@@ -47,7 +47,7 @@
                 Manager:
                     <select name = "employee_id" class="form-control">
                         <% employees.forEach(function(employee) { %>
-                            <% if((employee.role.toLowerCase()) == 'manager'){ %> 
+                            <% if((employee.role.toLowerCase()) == 'manager' && employee.DepartmentId == expense.DepartmentId){ %>  
                                 <option  value="<%= employee.id %>"><%= employee.first_name %></option>
                                 <% } %>
                         <br/>

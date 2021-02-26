@@ -46,6 +46,6 @@ router.get('/:employee_id', employeeController.employee_detail)
 
 router.get('/', employeeController.employee_list)
 
-router.get('/a', employeeController.index); 
+// router.get('/a', employeeController.index); 
 
 module.exports = router;

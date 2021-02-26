@@ -16,7 +16,7 @@
     <p>Category: <%= expense.Category.name %></p>
     <p>Time Created: <%= expense.time %></p>
     <p>Expense Made By: <%= expense.Employee.first_name %> <%= expense.Employee.last_name %> (<%= expense.Employee.role %>)</p>
-    <p>Expense Made From: <%= expense.Employee.department %></p>
+    <p>Expense Made From: <%= expense.Department.name %></p>
     <% if (expense.status == 'Pending') { %>
         <p>Status: <%= expense.status %></p>
         <button class="review-expense-button">Review Expense</button><br>
@@ -35,7 +35,7 @@
             Manager:
                 <select name = "employee_id" class="form-control">
                     <% employees.forEach(function(employee) { %>
-                        <% if((employee.role.toLowerCase()) == 'manager'){ %> 
+                        <% if((employee.role.toLowerCase()) == 'manager' && employee.DepartmentId == expense.DepartmentId){ %>  
                             <option  value="<%= employee.id %>"><%= employee.first_name %></option>
                             <% } %>
                     <br/>

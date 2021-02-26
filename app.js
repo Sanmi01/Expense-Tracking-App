@@ -70,7 +70,7 @@ app.get('/', async function(req, res, next) {
     }
   );
 
-  //placing listed by type
+  //expenses listed by type
   let expenseTypes = await models.Type.findAll({
     include: [
       {
@@ -79,6 +79,18 @@ app.get('/', async function(req, res, next) {
       }
     ],
     group: ['Type.id','Expenses.id']
+    }
+  );
+
+  //expenses listed by department
+  let expenseDepartments = await models.Department.findAll({
+    include: [
+      {
+        model: models.Expense,
+        attributes: ['details']
+      }
+    ],
+    group: ['Department.id','Expenses.id']
     }
   );
   
@@ -96,18 +108,23 @@ app.get('/', async function(req, res, next) {
       .then(function(categoryCount) {
         models.Type.findAndCountAll()
         .then(function(typeCount) {
+          models.Department.findAndCountAll()
+          .then(function(departmentCount){
           res.render('pages/index', {
             title: 'Homepage',
             employeesCount: employeesCount,
             expenseCount: expenseCount,
             categoryCount: categoryCount,
             typeCount: typeCount,
+            departmentCount: departmentCount,
             totalSum: totalSum,
             recents: recents,
             expensiveExpenses: expensiveExpenses,
             expenseCategories: expenseCategories,
             expenseTypes: expenseTypes,
+            expenseDepartments: expenseDepartments,
           });
+        });
         });
       });
     });
@@ -119,6 +136,7 @@ app.use('/employee', require('./routes/employee'))
 app.use('/expense', require('./routes/expense'))
 app.use('/category', require('./routes/category'))
 app.use('/type', require('./routes/type'))
+app.use('/department', require('./routes/department'))
 
 
 

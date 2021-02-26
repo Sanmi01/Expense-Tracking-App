@@ -1,0 +1,27 @@
+<%- include('../includes/head.ejs') %>
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+<div>
+    <h1>List of Departments</h1>
+</div>
+<div class="col-sm-12">    
+    <div class="">
+    <ol>
+    <% departments.forEach(function(department) { %>
+            <div class="details">
+                <h4><a href="/department/<%= department.id %>"><%= department.name %></a></h4>
+                <p>Name: <%= department.name %></p>
+                <p>Number of Expenses Under This Department: <%= department.Expenses.length %></p>
+                 <a href="/department/<%= department.id %>/update">Edit department</a> | <a href="/department/<%= department.id %>/delete">Delete department</a>
+            </div>
+        <br/>
+    <% }); %>
+    </ol>
+</div>
+</div>
+
+<a href="department/create"><button>Add department</button></a>
+
+<%- include('../includes/end.ejs') %>

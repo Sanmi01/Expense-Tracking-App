@@ -6,18 +6,18 @@
     
 <div class="col-sm-12 single">
     <h1><%= title %></h1>
-    <h3>Details of a Single Category</h3>
-    <p>Category ID = <%= category.id %></p>
-    <p>Name: <%= category.name %></p>
-    <a href="/category/<%= category.id %>/update">Edit category</a> | <a href="/category/<%= category.id %>/delete">Delete category</a>
+    <h3>Details of a Single Department</h3>
+    <p>Department ID = <%= department.id %></p>
+    <p>Name: <%= department.name %></p>
+    <a href="/department/<%= department.id %>/update">Edit department</a> | <a href="/department/<%= department.id %>/delete">Delete department</a>
 </div>
 
-<% if(category.Expenses.length == 0) { %>
-    <h2>There are no expenses made under this category yet </h2>
+<% if(department.Expenses.length == 0) { %>
+    <h2>There are no expenses made under this department yet </h2>
 <% } else { %>
-    <h2>Expenses Made: <%= category.Expenses.length %> </h2>
+    <h2>Expenses Made: <%= department.Expenses.length %> </h2>
     <div>
-        <% category.Expenses.forEach(function(expense) { %>
+        <% department.Expenses.forEach(function(expense) { %>
             <div class="details">
           <div>
             <p>Name of Expense: <%= expense.name %></p>
@@ -41,7 +41,7 @@
                 Manager:
                     <select name = "employee_id" class="form-control">
                         <% employees.forEach(function(employee) { %>
-                            <% if((employee.role.toLowerCase()) == 'manager' && employee.DepartmentId == expense.DepartmentId){ %> 
+                            <% if((employee.role.toLowerCase()) == 'manager' && employee.DepartmentId == expense.DepartmentId){ %>  
                                 <option  value="<%= employee.id %>"><%= employee.first_name %></option>
                                 <% } %>
                         <br/>
@@ -68,6 +68,8 @@
  <% } %>
 </div>
 
-<a href="category/create"><button>Add category</button></a>
+
+
+<a href="department/create"><button>Add department</button></a>
 
 <%- include('../includes/end.ejs') %>

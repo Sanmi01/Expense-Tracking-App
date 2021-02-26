@@ -8,6 +8,8 @@
     <p>Total number of employees: <%= employeesCount.count %></p>
     <p>Total number of expenses made: <%= expenseCount.count %></p>
     <p>Total number of Categories: <%= categoryCount.count %></p>
+    <p>Total number of Types: <%= typeCount.count %></p>
+    <p>Total number of Departments: <%= departmentCount.count %></p>
     <p>Total sum of all expenses: $<%= totalSum%></p>
 </div>
 
@@ -52,6 +54,24 @@
         <%}else{%> 
             <ol>
             <% expenseType.Expenses.forEach(item => { %> 
+                <li><%= item.details %></li>
+            <%}) %>
+            </ol>
+        <%}
+        %>
+    <% })
+    %>
+</div>
+
+<div>
+    <p>Expenses listed by Department</p>
+    <% expenseDepartments.forEach(expenseDepartment => { %> 
+        <p><%= expenseDepartment.name %></p>
+        <%if(expenseDepartment.Expenses.length == 0){%> 
+            <p>There are no expenses under this department yet</p>
+        <%}else{%> 
+            <ol>
+            <% expenseDepartment.Expenses.forEach(item => { %> 
                 <li><%= item.details %></li>
             <%}) %>
             </ol>
