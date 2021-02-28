@@ -34,14 +34,14 @@
 
 <div>
     <h2>Expenses listed by Category</h2>
-    <% expenseCategories.forEach(expenseCategory => { %> 
+    <% expensesCates.forEach(expensesCategory => { %> 
         <ul>
-        <li><h3><%= expenseCategory.name %></h3></li>
-        <%if(expenseCategory.Expenses.length == 0){%> 
+        <li><h3><%= expensesCategory.name %></h3></li>
+        <%if(expensesCategory.expenses.length == 0){%> 
             <p>There are no expenses under this category yet</p>
         <%}else{%> 
             <ol>
-            <% expenseCategory.Expenses.forEach(item => { %> 
+            <% expensesCategory.expenses.forEach(item => { %> 
                 <li>Name: <%= item.name %>, Amount: $<%= item.amount %> </li>
             <%}) %>
             </ol>

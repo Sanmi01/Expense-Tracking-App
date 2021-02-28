@@ -38,7 +38,6 @@
                     <button class="close-btn close">
                         <i class="fa fa-times"></i>
                     </button>
-                    <h2>Review Expense</h2>
                     <div>
                         <p>Name: <%= expense.name %></p>
                         <p>Details: <%= expense.details %></p>
@@ -74,13 +73,12 @@
       </div>
  <% } %>
 <div>
-    <!-- <button class="review-expense-button">Make an expense</button> -->
-    <div>
-        <div>
-    <!-- <button class="close-btn close"> -->
-        <!-- <i class="fa fa-times"></i> -->
-    <!-- </button> -->
-    <h2>Make an expense</h2>
+    <button class="review-expense-button">Make an expense</button>
+    <div class="modal-container modal">
+        <div class="modal">
+    <button class="close-btn close">
+        <i class="fa fa-times"></i>
+    </button>
     <form action="/expense/create" method="post">
         <input type="hidden" name="employee_id" value="<%= employee.id %>">
                 Name: <br>
@@ -101,14 +99,15 @@
                 </select>
                 <br><br>
                 Category:<br>
-                <select name = "category_id" class="form-control">
-                    <% categories.forEach(function(category) { %>
-                    <option  value="<%= category.id %>"><%= category.name %></option>
-                    <br/>
-                    <% }); %>
-                </select>
+                <p>
+                     <% categories.forEach(function(category) { %>
+              <input type="checkbox" class='categoryCheckbox' name="categories" id="<%= category.id %>" value="<%= category.id %>">
+                    <label for="<%= category.name %>"><%= category.name %></label>                 
+                <br/>
+               <% }); %>
+                     </p>
                 <br><br>
-                <input type="submit" value="Submit">
+                <input id="sub" type="submit" value="Submit">
     </form>
 </div>
 </div>

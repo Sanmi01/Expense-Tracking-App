@@ -58,11 +58,10 @@ module.exports = (sequelize, DataTypes) => {
         }
       });
 
-      models.Expense.belongsTo(models.Category, {
-        onDelete: "CASCADE",
-        foreignKey: {
-          allowNull: false
-        }
+      models.Expense.belongsToMany(models.Category, {
+        as: "categories",
+        through: "ExpenseCategories",
+        foreignKey: "expense_id"
       });
 
       models.Expense.belongsTo(models.Type, {

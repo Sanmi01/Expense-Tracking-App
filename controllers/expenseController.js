@@ -71,11 +71,36 @@ let employDepId = employee.DepartmentId;
         CategoryId: req.body.category_id,
         TypeId: req.body.type_id,
         DepartmentId: employDepId,
-    }).then(function() {
-        console.log("Expense created successfully");
-        res.redirect('/expense');
-       // check if there was an error during post creation
-  }); 
+    });
+    
+  let cateoryList = req.body.categories;
+
+  if (cateoryList.length == 1) {
+    // check if we have that category in our database
+    const category = await models.Category.findByPk(req.body.categories);
+    if (!category) {
+      return res.status(400);
+    }
+    //otherwise add new entry inside PostCategory table
+    await expense.addCategory(category);
+  }
+  // Ok now lets do for more than 1 category, the hard bit.
+  // if more than one category has been selected
+  else {
+    // Loop through all the ids in req.body.categories i.e. the selected categories
+    await req.body.categories.forEach(async (id) => {
+      // check if all category selected are in the database
+      const category = await models.Category.findByPk(id);
+      if (!category) {
+        return res.status(400);
+      }
+      // add to PostCategory after
+      await expense.addCategory(category);
+    });
+  }
+
+  // everything done, now redirect....to post listing.
+  res.redirect('/expense');
 }
 }
 
@@ -193,8 +218,16 @@ exports.expense_detail = async function(req, res, next) {
                       },
                       {
                         model: models.Category,
-                        attributes: ['id', 'name']
+                        as: 'categories',
+                        required: false,
+                        attributes: ['id', 'name'],
+                        through: {
+                          // This block of code allows you to retrieve the properties of the join table PostCategories
+                          model: models.ExpenseCategories,
+                          as: 'expenseCategories',
+                          attributes: ['expense_id', 'category_id'],
                       },
+                    }
                 ]
             },
             ).then(function(expense) {

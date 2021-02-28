@@ -44,14 +44,15 @@
                 </select>
                 <br><br>
                 Category:<br>
-                <select name = "category_id" class="form-control">
-                    <% categories.forEach(function(category) { %>
-                    <option  value="<%= category.id %>"><%= category.name %></option>
-                    <br/>
-                    <% }); %>
-                </select>
+                <p>
+                     <% categories.forEach(function(category) { %>
+              <input type="checkbox" class='categoryCheckbox' name="categories" id="<%= category.id %>" value="<%= category.id %>">
+                    <label for="<%= category.name %>"><%= category.name %></label>                 
+                <br/>
+               <% }); %>
+                     </p>
                 <br><br>
-                <input type="submit" value="Submit">
+                <input id="sub" type="submit" value="Submit">
             </form>
         </div>
     </div>
@@ -74,5 +75,8 @@
             </div>
         </div>
 <% } %>
+
+
+
 
 <%- include('../includes/end.ejs') %>

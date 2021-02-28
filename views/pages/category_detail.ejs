@@ -12,12 +12,12 @@
     <a href="/category/<%= category.id %>/update">Edit category</a> | <a href="/category/<%= category.id %>/delete">Delete category</a>
 </div>
 
-<% if(category.Expenses.length == 0) { %>
+<% if(category.expenses.length == 0) { %>
     <h2>There are no expenses made under this category yet </h2>
 <% } else { %>
-    <h2>Expenses Made: <%= category.Expenses.length %> </h2>
+    <h2>Expenses Made: <%= category.expenses.length %> </h2>
     <div>
-        <% category.Expenses.forEach(function(expense) { %>
+        <% category.expenses.forEach(function(expense) { %>
             <div class="details">
           <div>
             <p>Name of Expense: <%= expense.name %></p>

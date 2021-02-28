@@ -13,7 +13,12 @@
     <p>Details: <%= expense.details %></p>
     <p>Amount: $<%= expense.amount %></p>
     <p>Type: <%= expense.Type.name %></p>
-    <p>Category: <%= expense.Category.name %></p>
+    <b>Inside Categories:</b>
+    <ul class="catlist">
+<% expense.categories.forEach(function(category) { %> 
+ <li><a href="/category/<%= category.id %>/"> <%= category.name %> </a></li>
+<% }); %>
+    </ul>
     <p>Time Created: <%= expense.time %></p>
     <p>Expense Made By: <%= expense.Employee.first_name %> <%= expense.Employee.last_name %> (<%= expense.Employee.role %>)</p>
     <p>Expense Made From: <%= expense.Department.name %></p>

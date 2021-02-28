@@ -39,6 +39,12 @@ nav ul {
     list-style-type: none;
 }
 
+.catlist {
+    padding-left: 2rem;
+}
+
+
+
 nav ul li {
     margin-right: 20px;
     font-size: 1.3rem;
@@ -151,4 +157,8 @@ button {
     grid-template-rows: auto;
     gap: 2rem;
     padding: 2rem;
+}
+
+input[type=checkbox] {
+    width: 2rem;
 }

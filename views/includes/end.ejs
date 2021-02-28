@@ -4,6 +4,22 @@
         © Copyright 2020 Manifest & Company Inc.
     </p>
 </footer>
+<script>
+    function checkCat() {
+    var checkBoxes = document.getElementsByClassName( 'categoryCheckbox' );
+    var isChecked = false;
+    for (var i = 0; i < checkBoxes.length; i++) {
+        if ( checkBoxes[i].checked ) {
+            isChecked = true;
+        };
+    };
+    if ( isChecked ) {
+        
+        } else {
+            alert( 'Please, check at least one checkbox!' );
+        }   
+  }
+  </script>
 <script type="text/javascript" src="/js/script.js"></script>
 <script src="https://kit.fontawesome.com/b34638e3ce.js" crossorigin="anonymous"></script>
 <!-- BOOTSTRAP JAVASCRIPT SCRIPTS -->

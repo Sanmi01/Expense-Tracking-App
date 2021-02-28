@@ -9,7 +9,7 @@ exports.department_create_post = function (req, res) {
     }).then(function() {
         console.log("Department created successfully");
         res.redirect('/department');
-       // check if there was an error during post creation
+       // check if there was an error during  creation
   }); 
 }
 

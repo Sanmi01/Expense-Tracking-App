@@ -50,7 +50,7 @@ app.get('/', async function(req, res, next) {
     ],
     include:[
       {
-        model:models.Category,
+        model:models.Type,
         attributes: ['id', 'name'],
         
       }
@@ -59,14 +59,20 @@ app.get('/', async function(req, res, next) {
   });
 
   // expenses listed by category
-  let expenseCategories = await models.Category.findAll({
+  let expensesCates = await models.Category.findAll({
     include: [
       {
         model: models.Expense,
-        attributes: ['name', 'amount']
+        as: 'expenses',
+        attributes: ['id', 'name', 'details', 'amount'],
+        through: {
+            model: models.ExpenseCategories,
+            as: 'expenseCategories',
+            attributes: ['expense_id', 'category_id'],
+        }
       }
     ],
-    group: ['Category.id', 'Expenses.id']
+    group: ['Category.id', 'expenses.id', 'expenses.expenseCategories.createdAt', 'expenses.expenseCategories.updatedAt', 'expenses.expenseCategories.category_id', 'expenses.expenseCategories.expense_id']
     }
   );
 
@@ -120,7 +126,7 @@ app.get('/', async function(req, res, next) {
             totalSum: totalSum,
             recents: recents,
             expensiveExpenses: expensiveExpenses,
-            expenseCategories: expenseCategories,
+            expensesCates: expensesCates,
             expenseTypes: expenseTypes,
             expenseDepartments: expenseDepartments,
           });

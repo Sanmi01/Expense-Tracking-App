@@ -69,7 +69,16 @@ exports.category_detail = async function(req, res, next) {
             req.params.category_id, {
                 include: [
                   {
-                    model: models.Expense
+                    model: models.Expense,
+                    as: 'expenses',
+                    required: false,
+                    attributes: ['id', 'name', 'details', 'amount', 'status', 'DepartmentId'],
+                    through: {
+                        // This block of code allows you to retrieve the properties of the join table PostCategories
+                        model: models.ExpenseCategories,
+                        as: 'expenseCategories',
+                        attributes: ['expense_id', 'category_id'],
+                    }
                   }
                         ]
                 }
@@ -84,10 +93,18 @@ exports.category_list = async function(req, res, next) {
     models.Category.findAll({
         include: [
             {
-                model: models.Expense,
-                attributes: ['name', 'amount']
-              },
-        ]
+              model: models.Expense,
+              as: 'expenses',
+              required: false,
+              attributes: ['id', 'name', 'details', 'amount', 'status', 'DepartmentId'],
+              through: {
+                  // This block of code allows you to retrieve the properties of the join table PostCategories
+                  model: models.ExpenseCategories,
+                  as: 'expenseCategories',
+                  attributes: ['expense_id', 'category_id'],
+              }
+            }
+                  ]
     })
     .then(function(categories) {
         console.log("rendering category list");
